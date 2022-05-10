@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import ShowTodo from './ShowTodo';
 
 function Todo() {
 
-    const [task, setTask] = useState("Add Some Task")
+    const [task, setTask] = useState("Add Some Task");
+    const [data, setData] = useState([]);
 
     //On Value Change Handler
     const onChangeHandler = (e) => {
@@ -13,7 +15,10 @@ function Todo() {
     //On Submit Handler
     const submitHandler =(e) => {
        e.preventDefault();
-       console.log("submit")
+       const newData = task;
+       setData([...data, newData])
+
+       setTask('')
     }
     
 
@@ -25,6 +30,17 @@ function Todo() {
 <input type="text" id='todo-input' value={task} onChange={onChangeHandler} />
 <button type='submit'> Add Todo</button>
 </form>
+
+
+{
+  data.map((value,index)=> {
+<ShowTodo
+    key={index}
+    id={index}
+    task={value}
+    />
+  })
+}
 
 </div>
 
